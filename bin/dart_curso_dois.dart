@@ -6,16 +6,15 @@ void main(List<String> arguments) {
   int diasDesdeColheita = 20;
   bool isMadura = funcEstaMadura(diasDesdeColheita);
 
-  mostarMadura("uva", 40, cor: "Roxa");
-  int quantosDias = funcQuantosDiasMadura(diasDesdeColheita);
-  print(quantosDias);
+  if (diasDesdeColheita >=30){
+    isMadura = true;
+  }else{
+    isMadura = false;
+  }
+
 }
 
- int funcQuantosDiasMadura(int dias){
-  int diasParaMadura = 30;
-  int quantosDiasFaltam = diasParaMadura - dias;
-  return quantosDiasFaltam;
-}
+
 
 //Parametros
 /*Posicionais obrigatorios, devem ser posicionados na ordem
@@ -38,6 +37,15 @@ caso nao seja, ele preenche com o default definido no parametro da função
 Ele é um parametro obrigatorio, porem é nomeado, o que torna mais simples
  a vizualição de qual argumento vai para qual parametro
 */
+
+bool funcEstaMadura(int dias){
+  if(dias >= 30){
+  return true;
+  }else{
+    return false;
+  }
+}
+
 mostarMadura (String nome, int dias, {required String cor}){
   if(dias >=30){
     print("A $nome está madura");
@@ -51,11 +59,23 @@ mostarMadura (String nome, int dias, {required String cor}){
 
 }
 
-bool funcEstaMadura(int dias){
-  if(dias >= 30){
-  return true;
-  }else{
-    return false;
-  }
+ int funcQuantosDiasMadura(int dias){
+  int diasParaMadura = 30;
+  int quantosDiasFaltam = diasParaMadura - dias;
+  return quantosDiasFaltam;
 }
 
+class Fruta{
+  String nome;
+  double peso;
+  String cor;
+  String sabor;
+  int diasDesdeColheita;
+  bool? isMadura;
+
+  Fruta(this.nome,this.peso,this.cor,this.sabor,this.diasDesdeColheita,{this.isMadura});
+  estaMadura(int diasParaMadura){
+    isMadura = diasDesdeColheita >= diasParaMadura;
+    print("A sua $nome foi colhida a $diasDesdeColheita dias, e precisa $diasParaMadura para poder comer. Ele está madura? $isMadura"); 
+  }
+}
